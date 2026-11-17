@@ -14,7 +14,7 @@ Claude-style input box for DeepSeek Harness (web client): everything in and arou
 | `to-bottom` | `src/parts/08-to-bottom.ts` | 「回到底部」 button: pinned just above the input box (same width, centred), a 32px DeepSeek-token glass circle with a ↓ arrow and three breathing blue dots while a reply runs |
 | `stack-cards` | `src/parts/09-stack-cards.ts` | Goal strip above the composer, restyled as an opaque card like the queue tray |
 
-Part of a set of independent DeepSeek Harness UI bundles: **dsh-composer-display** (the input box and what sits on it), **dsh-conversation-enhancer** (the conversation view), **dsh-claude-shell** (the app frame), **dsh-whale-theme** (background, glass, fonts and its own Settings › 主题 page) and **dsh-context-monitor** (context usage in the composer and in a 上下文透视 tab). Each one works on its own; they share one build script, vendored here as `scripts/`.
+Part of a set of independent DeepSeek Harness UI bundles: [dsh-composer-display](https://github.com/DaYangtuo247/dsh-composer-display) (the input box and what sits on it), [dsh-conversation-enhancer](https://github.com/DaYangtuo247/dsh-conversation-enhancer) (the conversation view), [dsh-whale-theme](https://github.com/DaYangtuo247/dsh-whale-theme) (background, glass, fonts and its own Settings › 主题 page) and [dsh-context-monitor](https://github.com/DaYangtuo247/dsh-context-monitor) (context usage in the composer and in a 上下文透视 tab). Each one works on its own; they share one build script, vendored here as `scripts/`.
 
 ## Install
 
