@@ -1,0 +1,98 @@
+/* no :root defaults: each rule falls back to the dsh token itself, resolved where it is used */
+/* ---- the + key: unchanged, declaration for declaration -------------------------------------
+ * This block is the reference the send key is written against, not the other way round: leave it
+ * alone unless the + key itself is meant to change. */
+[data-composer-seat] [class*=_tools] > button[class*=_add] {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 8px !important;
+  corner-shape: round;
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--dsw-alias-label-secondary) !important;
+  transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+
+@media (hover: hover) {
+  [data-composer-seat] [class*=_tools] > button[class*=_add]:hover:not(:disabled) {
+    background: var(--dsw-alias-interactive-bg-hover) !important;
+    color: var(--dsw-alias-label-primary) !important;
+  }
+}
+[data-composer-seat] [class*=_tools] > button[class*=_add] > svg {
+  display: none !important;
+}
+
+[data-composer-seat] [class*=_tools] > button[class*=_add]::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2016%2016'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20stroke-width%3D'1.4'%20d%3D'M8%203v10M3%208h10'%2F%3E%3C%2Fsvg%3E") center/15px 15px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2016%2016'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20stroke-width%3D'1.4'%20d%3D'M8%203v10M3%208h10'%2F%3E%3C%2Fsvg%3E") center/15px 15px no-repeat;
+}
+
+/* ---- the send / stop key: the + key's twin -------------------------------------------------
+ * Same 28px box, same 8px corner, same transparent rest state, same 15px masked glyph (a 15px
+ * RETURN on its 24 viewBox at stroke 2.1 draws the + glyph's 1.3px), same wash on hover, so the
+ * two keys read and behave as one pair. Three deliberate differences: the hover carries no
+ * :not(:disabled) (an empty composer leaves this key disabled, and that was exactly the state in
+ * which the wash used to vanish), the transform is pinned because dsh lifts this key 2px with
+ * translateY(-2px) — alone enough to put it off the + key's line — and a disabled key is dimmed. */
+[data-composer-seat] [class*=_trailing] > button[class*=_primary] {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  corner-shape: round;
+  background: var(--dcb-send-bg, transparent) !important;
+  color: var(--dcb-send-fg, var(--dsw-alias-label-secondary)) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: background-color 0.12s ease, color 0.12s ease, opacity 0.12s ease;
+}
+
+@media (hover: hover) {
+  [data-composer-seat] [class*=_trailing] > button[class*=_primary]:hover:not(:disabled) {
+    background: var(--dcb-send-bg-hover, var(--dsw-alias-interactive-bg-hover)) !important;
+    color: var(--dsw-alias-label-primary) !important;
+  }
+}
+/* :hover:not(:disabled), exactly as on the + key: an empty composer leaves this key disabled and
+   nothing to press, so it must stay mute — the browser still matches :hover on a disabled control. */
+[data-composer-seat] [class*=_trailing] > button[class*=_primary]:disabled:not([data-sending]) {
+  opacity: 0.45 !important;
+}
+
+[data-composer-seat] [class*=_trailing] > button[class*=_primary] > svg {
+  color: inherit !important;
+}
+
+[data-composer-seat] [class*=_trailing] > button[class*=_primary]:has(> svg path[d^="M8.3125 0.98"]) > svg {
+  display: none !important;
+}
+
+[data-composer-seat] [class*=_trailing] > button[class*=_primary]:has(> svg path[d^="M8.3125 0.98"])::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'2.1'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M18.5%205.5v6a3%203%200%200%201-3%203H5.5'%2F%3E%3Cpath%20d%3D'M9.5%2010.5l-4%204%204%204'%2F%3E%3C%2Fsvg%3E") center/15px 15px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'2.1'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M18.5%205.5v6a3%203%200%200%201-3%203H5.5'%2F%3E%3Cpath%20d%3D'M9.5%2010.5l-4%204%204%204'%2F%3E%3C%2Fsvg%3E") center/15px 15px no-repeat;
+}
+
+/* running: the same key, in the same slot, turned into a small rounded stop square */
+/* the stop key gets the + key's treatment too: no fill at rest, the same wash on hover */
+[data-composer-seat] [class*=_trailing] > button[class*=_primary]:is([aria-label*=停止], [aria-label*=Stop i]) > svg {
+  display: none !important;
+}
+
+[data-composer-seat] [class*=_trailing] > button[class*=_primary]:is([aria-label*=停止], [aria-label*=Stop i])::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 2.5px;
+  background: currentColor;
+}

@@ -1,0 +1,123 @@
+/* the strip itself: same box as the plan card under the newest reply */
+[data-goal-bar] [class*=_bar] {
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  border: 1px solid var(--dsw-alias-border-l2) !important;
+  background: var(--dsw-specific-input-major, #fff) !important;
+  padding: 4px 6px 4px 12px !important;
+  max-width: var(--dsh-composer-card-max-width, 672px) !important;
+}
+
+/* dsh paints the menu surface (fill + backdrop blur) on a ::before layer; the bar carries the fill
+   itself instead, because the strip floats over the scrolling conversation and a see-through fill
+   lets replies show through the label. */
+[data-goal-bar] [class*=_bar]::before {
+  display: none !important;
+}
+
+/* phase label and objective, as in the plan card header */
+[data-goal-bar] [class*=_label] {
+  font-size: 13px;
+  line-height: 22px;
+  font-weight: 500;
+}
+
+[data-goal-bar] [class*=_objective] {
+  font-size: 13px;
+  line-height: 22px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+[data-goal-bar] [class*=_error] {
+  font-size: 12px;
+  line-height: 22px;
+}
+
+[data-goal-bar] [class*=_goalGlyph] {
+  color: var(--dsw-alias-label-tertiary);
+}
+
+/* keys: the queue tray's 26px square wash, not dsh's 28px circle */
+[data-goal-bar] [class*=_iconBtn] {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  corner-shape: round;
+  color: var(--dsw-alias-label-tertiary);
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+@media (hover: hover) {
+  [data-goal-bar] [class*=_iconBtn]:hover:not(:disabled) {
+    background: var(--dsw-alias-interactive-bg-hover);
+    color: var(--dsw-alias-label-primary);
+  }
+}
+[data-goal-bar] [class*=_iconBtn]:focus-visible {
+  outline: 2px solid var(--dsw-alias-border-l2);
+  outline-offset: 1px;
+}
+
+[data-goal-bar] [class*=_iconBtn]:disabled {
+  opacity: 0.4;
+}
+
+/* the inline edit strip keeps the same box, it just grows with the editor; its field wears the same
+   hairline frame as the queue tray's editor so the two editing surfaces read as one family */
+[data-goal-bar] [class*=_editBar] {
+  height: auto !important;
+  min-height: 36px;
+  gap: 2px;
+}
+
+[data-goal-bar] [class*=_editBar] input, [data-goal-bar] [class*=_editBar] textarea {
+  height: 30px !important;
+  padding: 0 8px !important;
+  border: 1px solid var(--dsw-alias-border-l2) !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  font-family: inherit !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
+  color: var(--dsw-alias-label-primary) !important;
+  transition: border-color 0.12s ease;
+}
+
+[data-goal-bar] [class*=_editBar] input:hover, [data-goal-bar] [class*=_editBar] textarea:hover {
+  border-color: var(--dsw-alias-border-l3) !important;
+}
+
+[data-goal-bar] [class*=_editBar] input:focus, [data-goal-bar] [class*=_editBar] textarea:focus,
+[data-goal-bar] [class*=_editBar] input:focus-visible, [data-goal-bar] [class*=_editBar] textarea:focus-visible {
+  border-color: var(--dsw-alias-border-l4) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+[data-goal-bar] [class*=_editBar] button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  color: var(--dsw-alias-label-tertiary);
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+[data-goal-bar] [class*=_editBar] button:hover:not(:disabled) {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--dsw-alias-label-primary);
+}
+
+[data-goal-bar] [class*=_editBar] button svg {
+  width: 14px;
+  height: 14px;
+}

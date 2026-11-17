@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Claude-style Composer",
+    "description": "The input box and what sits on it: one-row layout, return-glyph send button, live Markdown highlighting, shorter hints, a queued-message tray, Claude-style Mode and Model menus, a smooth gliding caret and a centred back-to-bottom button."
+  }
+}

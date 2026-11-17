@@ -1,0 +1,47 @@
+[data-composer-input]::highlight(dcbmd-hide) {
+  color: transparent;
+  text-shadow: none;
+}
+
+[data-composer-input]::highlight(dcbmd-accent) {
+  color: var(--dsw-alias-label-tertiary);
+}
+
+[data-composer-input]::highlight(dcbmd-code) {
+  color: #c6613f;
+  background-color: color-mix(in srgb, var(--dsw-alias-label-primary) 7%, transparent);
+}
+
+[data-composer-input]::highlight(dcbmd-fence) {
+  color: var(--dsw-alias-label-secondary);
+  background-color: color-mix(in srgb, var(--dsw-alias-label-primary) 5%, transparent);
+}
+
+[data-composer-input]::highlight(dcbmd-strong) {
+  color: var(--dsw-alias-label-primary);
+  text-shadow: 0.35px 0 0 currentColor, -0.2px 0 0 currentColor;
+}
+
+[data-composer-input]::highlight(dcbmd-em) {
+  color: color-mix(in srgb, var(--dsw-alias-label-primary) 72%, #c6613f);
+}
+
+[data-composer-input]::highlight(dcbmd-head) {
+  color: var(--dsw-alias-label-primary);
+  text-shadow: 0.4px 0 0 currentColor, -0.2px 0 0 currentColor;
+}
+
+[data-composer-input]::highlight(dcbmd-link) {
+  color: var(--dsw-alias-link, #2f6fdd);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--dsw-alias-link, #2f6fdd) 40%, transparent);
+}
+
+[data-composer-input]::highlight(dcbmd-strike) {
+  color: var(--dsw-alias-label-tertiary);
+  text-decoration: line-through;
+}
+
+[data-composer-input]::highlight(dcbmd-quote) {
+  color: var(--dsw-alias-label-secondary);
+}

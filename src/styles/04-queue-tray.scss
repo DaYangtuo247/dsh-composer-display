@@ -1,0 +1,364 @@
+[data-queue-dock] {
+  display: none !important;
+}
+
+.dqt {
+  margin: 0 auto 8px;
+  width: 100%;
+  max-width: var(--dsh-composer-card-max-width, 672px);
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid var(--dsw-alias-border-l2);
+  background: var(--dsw-specific-input-major, #fff);
+  padding: 4px 6px 4px 12px;
+  overflow: hidden;
+  animation: dqt-in 0.16s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes dqt-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dqt {
+    animation: none;
+  }
+}
+.dqt-head {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 0 2px;
+}
+
+.dqt-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 6px;
+  color: var(--dsw-alias-label-primary);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.dqt-toggle:hover {
+  background: var(--dsw-alias-interactive-bg-hover);
+}
+
+.dqt-toggle svg {
+  width: 14px;
+  height: 14px;
+  color: var(--dsw-alias-label-tertiary);
+  flex: none;
+}
+
+.dqt-chev {
+  display: flex;
+  margin-left: 1px;
+  color: var(--dsw-alias-label-tertiary);
+  transition: transform 0.16s ease;
+}
+
+.dqt-chev svg {
+  width: 14px;
+  height: 14px;
+}
+
+.dqt[data-open="0"] .dqt-chev {
+  transform: rotate(-90deg);
+}
+
+.dqt-all {
+  flex: none;
+}
+
+.dqt-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 264px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dsw-alias-border-l2) transparent;
+}
+
+.dqt-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dqt-list::-webkit-scrollbar-thumb {
+  background: var(--dsw-alias-border-l2);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.dqt-list::-webkit-scrollbar-thumb:hover {
+  background: var(--dsw-alias-label-tertiary);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.dqt-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dqt-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  padding: 0;
+  border-radius: 8px;
+}
+
+.dqt-row[data-busy="1"] {
+  opacity: 0.6;
+}
+
+.dqt-idx {
+  flex: none;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--dsw-alias-label-tertiary);
+  min-width: 14px;
+  text-align: right;
+}
+
+.dqt-preview {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--dsw-alias-label-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dqt-preview [class*=_markdown] {
+  display: inline;
+}
+
+.dqt-thumbs {
+  display: flex;
+  gap: 4px;
+  flex: none;
+  align-self: center;
+}
+
+.dqt-thumbs img {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.dqt-file {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--dsw-alias-label-tertiary);
+  max-width: 120px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dqt-status {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.dqt-spin {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  corner-shape: round;
+  border: 1.5px solid var(--dsw-alias-border-l2);
+  border-top-color: var(--dsw-alias-label-secondary);
+  animation: dqt-spin 0.8s linear infinite;
+}
+
+@keyframes dqt-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.dqt-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+  margin-left: 2px;
+}
+
+.dqt-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--dsw-alias-label-tertiary);
+  cursor: pointer;
+  padding: 0;
+  align-self: center;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.dqt-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.dqt-btn:hover:not(:disabled) {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--dsw-alias-label-primary);
+}
+
+.dqt-btn:focus-visible {
+  outline: 2px solid var(--dsw-alias-border-l2);
+  outline-offset: 1px;
+}
+
+.dqt-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.dqt-btn[data-kind=steer] {
+  color: var(--dsw-alias-label-secondary);
+}
+
+.dqt-btn[data-kind=steer]:hover:not(:disabled) {
+  color: #2f6fdd;
+  background: color-mix(in srgb, #2f6fdd 10%, transparent);
+}
+
+.dqt-btn[data-kind=remove]:hover:not(:disabled) {
+  color: #c4453c;
+  background: color-mix(in srgb, #c4453c 10%, transparent);
+}
+
+.dqt-btn[data-kind=save] {
+  color: #2f6fdd;
+}
+
+.dqt-all {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--dsw-alias-label-secondary);
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.dqt-all svg {
+  width: 13px;
+  height: 13px;
+}
+
+.dqt-all:hover:not(:disabled) {
+  background: color-mix(in srgb, #2f6fdd 10%, transparent);
+  color: #2f6fdd;
+}
+
+.dqt-all:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* editing in place: dsh's InlineEditor brings its own heavy input chrome; keep a frame — it marks the
+   editable field — but make it the tray's own hairline box, and give its two keys the row's wash. */
+.dqt-edit {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.dqt-edit input, .dqt-edit textarea, [data-composer-card] .dqt-edit input, [data-composer-card] .dqt-edit textarea {
+  flex: 1;
+  min-width: 0;
+  height: 30px;
+  padding: 0 8px !important;
+  border: 1px solid var(--dsw-alias-border-l2) !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  font: inherit !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
+  color: var(--dsw-alias-label-primary) !important;
+  transition: border-color 0.12s ease;
+}
+
+.dqt-edit input:hover, .dqt-edit textarea:hover {
+  border-color: var(--dsw-alias-border-l3) !important;
+}
+
+.dqt-edit input:focus, .dqt-edit textarea:focus, .dqt-edit input:focus-visible, .dqt-edit textarea:focus-visible {
+  border-color: var(--dsw-alias-border-l4) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.dqt-edit button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  color: var(--dsw-alias-label-tertiary);
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.dqt-edit button:hover:not(:disabled) {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--dsw-alias-label-primary);
+}
+
+.dqt-edit button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.dqt-edit button svg {
+  width: 14px;
+  height: 14px;
+}

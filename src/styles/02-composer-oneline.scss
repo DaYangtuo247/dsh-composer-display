@@ -1,0 +1,239 @@
+/* one-row composer (Claude style): [+] [input] [send] in the card, mode / model / stats on one line below */
+[class*=_root]:has(> [data-composer-card]) {
+  display: grid !important;
+  grid-template-columns: auto auto minmax(0, 1fr) auto auto auto;
+  grid-template-rows: auto auto auto auto;
+  align-items: center;
+  column-gap: 10px;
+  width: 100%;
+  max-width: calc(var(--dsh-composer-card-max-width, 672px) + 32px);
+  margin-inline: auto;
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+  --dsw-elevation-stroke-color:var(--dsw-alias-border-l2);
+}
+
+[class*=_root]:has(> [data-composer-card])::before {
+  content: "";
+  grid-row: 1/4;
+  grid-column: 1/-1;
+  align-self: stretch;
+  z-index: -1;
+  border-radius: var(--dsw-radius-lg, 16px);
+  background: var(--dsw-specific-input-major);
+  box-shadow: var(--dsw-elevation-soft);
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card], [class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row], [class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row] > [class*=_tools], [class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row] > [class*=_trailing] {
+  display: contents !important;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [data-composer-overlay] {
+  grid-row: 1;
+  grid-column: 1/-1;
+  position: relative;
+  align-self: start;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [data-slot="conversation.input.attachments"] > * {
+  grid-row: 2;
+  grid-column: 1/-1;
+  padding: 8px 12px 0;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [data-input-scroll] {
+  grid-row: 3;
+  grid-column: 1/-1;
+  margin: 0 !important;
+  padding: 0 50px 0 46px;
+  box-sizing: border-box;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] [data-composer-input] {
+  padding: 10px 0 !important;
+  min-height: 44px !important;
+  box-sizing: border-box;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] [data-composer-placeholder] {
+  top: 10px !important;
+  left: 0 !important;
+  right: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row] > [class*=_tools] > [class*=_add] {
+  grid-row: 3;
+  grid-column: 1/-1;
+  justify-self: start;
+  align-self: end;
+  margin: 0 0 8px 9px;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row] > [class*=_trailing] > [class*=_primary] {
+  grid-row: 3;
+  grid-column: 1/-1;
+  justify-self: end;
+  align-self: end;
+  margin: 0 9px 8px 0;
+}
+
+/* While a reply runs the trailing primary key becomes the stop one (aria-label 停止): it keeps the
+   send key's slot, mirrored with + around the card's centre. Only if dsh renders both at once does
+   the stop step one button to the left, so it stays visible beside the send. */
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row] > [class*=_trailing]:has(> button[class*=_primary]:is([aria-label*=停止], [aria-label*=Stop i])):has(> button[class*=_primary]:not(:is([aria-label*=停止], [aria-label*=Stop i]))) > button[class*=_primary]:is([aria-label*=停止], [aria-label*=Stop i]) {
+  margin-right: 43px;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row] > [class*=_trailing] > [class*=_activity] {
+  grid-row: 3;
+  grid-column: 1/-1;
+  justify-self: end;
+  align-self: end;
+  margin: 0 50px 12px 0;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row] > [class*=_tools] > [class*=_modes] {
+  grid-row: 4;
+  grid-column: 5;
+  justify-self: end;
+  margin-top: 6px;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row] > [class*=_tools] > [data-slot="conversation.input.left"] > * {
+  grid-row: 4;
+  grid-column: 3;
+  justify-self: start;
+  margin-top: 6px;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row] > [class*=_trailing] > [class*=_standardControls] {
+  grid-row: 4;
+  grid-column: 4;
+  justify-self: end;
+  margin-top: 6px;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-dock] {
+  display: contents !important;
+}
+
+/* marker for other plugins (dsh-claude-theme): this root is laid out by us, its card is display:contents */
+[class*=_root]:has(> [data-composer-card]) {
+  --dco-on:1;
+}
+
+/* the input dock (queue tray, goal strip, notices) is a row in dsh: every entry sizes to its content and
+   they end up side by side, squeezed, each showing the page through its own fill. Stack them instead —
+   one full-width card per row, above the composer, like the tray was when it was the only entry. */
+[data-slot="conversation.input.dock"] {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 6px !important;
+  width: 100% !important;
+  max-width: var(--dsh-composer-card-max-width, 672px) !important;
+  margin: 0 auto !important;
+}
+
+[data-slot="conversation.input.dock"] > * {
+  width: 100% !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-dock] > [data-slot="conversation.composer.dock"] > * {
+  grid-row: 4;
+  margin-top: 6px;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-dock] [data-composer-stat=activity] {
+  grid-column: 1;
+  justify-self: start;
+  margin-left: 6px;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-dock] [data-composer-stat=usage] {
+  grid-column: 2;
+  justify-self: start;
+}
+
+/* context usage ring at the right end of the meta line: dsh-claude-context's ring, or, when that plugin is off,
+   dsh's own meter (a direct child of the dock, not a slot entry; without a place it fell into the flexible column) */
+[class*=_root]:has(> [data-composer-card]) > [data-composer-dock] .clx-dock-ring {
+  grid-column: 6;
+  justify-self: end;
+  margin-right: 4px;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-dock] > :not([data-slot]) {
+  grid-row: 4;
+  grid-column: 6;
+  justify-self: end;
+  align-self: center;
+  margin: 6px 4px 0 0;
+}
+
+/* its panel stays invisible until it has been lined up with the ring (no frame at dsh's own spot) */
+body:has([data-composer-dock] > :not([data-slot]) button[aria-haspopup=dialog][aria-expanded=true]) [role=dialog][style*="--dsh-anchored-max-width"]:not([data-dco-placed]) {
+  visibility: hidden !important;
+}
+
+/* …then opens like the mode and model menus beside it (dsh's panel has no animation of its own) */
+[role=dialog][data-dco-placed] {
+  animation: dco-in 0.16s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transform-origin: bottom right;
+}
+
+@keyframes dco-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [role=dialog][data-dco-placed] {
+    animation: none;
+  }
+}
+[class*=_root]:has(> [data-composer-card]) > [data-composer-dock] [data-composer-stat] {
+  opacity: 0.72;
+  transition: opacity 0.15s ease;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-dock] [data-composer-stat]:hover, [class*=_root]:has(> [data-composer-card]) > [data-composer-dock] [data-composer-stat]:focus-within {
+  opacity: 1;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-dock] [data-composer-stat] svg {
+  display: none;
+}
+
+[class*=_root]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row][data-model-compact] {
+  --dsh-composer-model-text-display:block;
+  --dsh-composer-model-icon-display:none;
+}
+
+[class*=_root][data-dco-narrow]:has(> [data-composer-card]) > [data-composer-card] > [class*=_row][data-model-compact] {
+  --dsh-composer-model-text-display:none;
+  --dsh-composer-model-icon-display:block;
+}
+
+[class*=_root][data-dco-narrow]:has(> [data-composer-card]) > [data-composer-dock] [data-composer-stat] {
+  grid-row: 5;
+  margin-top: 2px;
+}
+
+[class*=_root][data-dco-narrow]:has(> [data-composer-card]) > [data-composer-dock] [data-composer-stat=activity] {
+  grid-column: 1/-1;
+  justify-self: start;
+}
+
+[class*=_root][data-dco-narrow]:has(> [data-composer-card]) > [data-composer-dock] [data-composer-stat=usage] {
+  grid-column: 1/-1;
+  justify-self: end;
+  margin-right: 4px;
+}

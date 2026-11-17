@@ -1,0 +1,8 @@
+[class*=_root]:has(> [data-composer-card])[data-dch-ph] [data-composer-placeholder] {
+  font-size: 0 !important;
+}
+
+[class*=_root]:has(> [data-composer-card])[data-dch-ph] [data-composer-placeholder]::before {
+  content: var(--dch-ph);
+  font-size: 14px;
+}

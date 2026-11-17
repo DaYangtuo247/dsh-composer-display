@@ -1,0 +1,384 @@
+/* ===== dsh-composer-buttons · composer-buttons */
+
+/* no :root defaults: each rule falls back to the dsh token itself, resolved where it is used */
+/* ---- the + key: unchanged, declaration for declaration -------------------------------------
+ * This block is the reference the send key is written against, not the other way round: leave it
+ * alone unless the + key itself is meant to change. */
+[data-composer-seat] [class*="_tools"]>button[class*="_add"]{width:28px!important;height:28px!important;border-radius:8px!important;corner-shape:round;background:transparent!important;border:0!important;color:var(--dsw-alias-label-secondary)!important;transition:background-color .12s ease,color .12s ease,border-color .12s ease}
+@media (hover:hover){[data-composer-seat] [class*="_tools"]>button[class*="_add"]:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover)!important;color:var(--dsw-alias-label-primary)!important}}
+[data-composer-seat] [class*="_tools"]>button[class*="_add"]>svg{display:none!important}
+[data-composer-seat] [class*="_tools"]>button[class*="_add"]::before{content:"";width:15px;height:15px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2016%2016'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20stroke-width%3D'1.4'%20d%3D'M8%203v10M3%208h10'%2F%3E%3C%2Fsvg%3E") center/15px 15px no-repeat;mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2016%2016'%20fill%3D'none'%20stroke%3D'black'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20stroke-width%3D'1.4'%20d%3D'M8%203v10M3%208h10'%2F%3E%3C%2Fsvg%3E") center/15px 15px no-repeat}
+/* ---- the send / stop key: the + key's twin -------------------------------------------------
+ * Same 28px box, same 8px corner, same transparent rest state, same 15px masked glyph (a 15px
+ * RETURN on its 24 viewBox at stroke 2.1 draws the + glyph's 1.3px), same wash on hover, so the
+ * two keys read and behave as one pair. Three deliberate differences: the hover carries no
+ * :not(:disabled) (an empty composer leaves this key disabled, and that was exactly the state in
+ * which the wash used to vanish), the transform is pinned because dsh lifts this key 2px with
+ * translateY(-2px) — alone enough to put it off the + key's line — and a disabled key is dimmed. */
+[data-composer-seat] [class*="_trailing"]>button[class*="_primary"]{width:28px!important;height:28px!important;min-width:28px!important;padding:0!important;border:0!important;border-radius:8px!important;corner-shape:round;
+  background:var(--dcb-send-bg,transparent)!important;color:var(--dcb-send-fg,var(--dsw-alias-label-secondary))!important;box-shadow:none!important;
+  transform:none!important;transition:background-color .12s ease,color .12s ease,opacity .12s ease}
+@media (hover:hover){[data-composer-seat] [class*="_trailing"]>button[class*="_primary"]:hover:not(:disabled){background:var(--dcb-send-bg-hover,var(--dsw-alias-interactive-bg-hover))!important;color:var(--dsw-alias-label-primary)!important}}
+/* :hover:not(:disabled), exactly as on the + key: an empty composer leaves this key disabled and
+   nothing to press, so it must stay mute — the browser still matches :hover on a disabled control. */
+[data-composer-seat] [class*="_trailing"]>button[class*="_primary"]:disabled:not([data-sending]){opacity:.45!important}
+[data-composer-seat] [class*="_trailing"]>button[class*="_primary"]>svg{color:inherit!important}
+[data-composer-seat] [class*="_trailing"]>button[class*="_primary"]:has(>svg path[d^="M8.3125 0.98"])>svg{display:none!important}
+[data-composer-seat] [class*="_trailing"]>button[class*="_primary"]:has(>svg path[d^="M8.3125 0.98"])::before{content:"";width:15px;height:15px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'2.1'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M18.5%205.5v6a3%203%200%200%201-3%203H5.5'%2F%3E%3Cpath%20d%3D'M9.5%2010.5l-4%204%204%204'%2F%3E%3C%2Fsvg%3E") center/15px 15px no-repeat;mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'2.1'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M18.5%205.5v6a3%203%200%200%201-3%203H5.5'%2F%3E%3Cpath%20d%3D'M9.5%2010.5l-4%204%204%204'%2F%3E%3C%2Fsvg%3E") center/15px 15px no-repeat}
+/* running: the same key, in the same slot, turned into a small rounded stop square */
+/* the stop key gets the + key's treatment too: no fill at rest, the same wash on hover */
+[data-composer-seat] [class*="_trailing"]>button[class*="_primary"]:is([aria-label*="停止"],[aria-label*="Stop" i])>svg{display:none!important}
+[data-composer-seat] [class*="_trailing"]>button[class*="_primary"]:is([aria-label*="停止"],[aria-label*="Stop" i])::before{content:"";width:9px;height:9px;border-radius:2.5px;background:currentColor}
+
+
+
+/* ===== dsh-composer-buttons · composer-markdown */
+
+[data-composer-input]::highlight(dcbmd-hide){color:transparent;text-shadow:none}
+[data-composer-input]::highlight(dcbmd-accent){color:var(--dsw-alias-label-tertiary)}
+[data-composer-input]::highlight(dcbmd-code){color:#c6613f;background-color:color-mix(in srgb,var(--dsw-alias-label-primary) 7%,transparent)}
+[data-composer-input]::highlight(dcbmd-fence){color:var(--dsw-alias-label-secondary);background-color:color-mix(in srgb,var(--dsw-alias-label-primary) 5%,transparent)}
+[data-composer-input]::highlight(dcbmd-strong){color:var(--dsw-alias-label-primary);text-shadow:.35px 0 0 currentColor,-.2px 0 0 currentColor}
+[data-composer-input]::highlight(dcbmd-em){color:color-mix(in srgb,var(--dsw-alias-label-primary) 72%,#c6613f)}
+[data-composer-input]::highlight(dcbmd-head){color:var(--dsw-alias-label-primary);text-shadow:.4px 0 0 currentColor,-.2px 0 0 currentColor}
+[data-composer-input]::highlight(dcbmd-link){color:var(--dsw-alias-link,#2f6fdd);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--dsw-alias-link,#2f6fdd) 40%,transparent)}
+[data-composer-input]::highlight(dcbmd-strike){color:var(--dsw-alias-label-tertiary);text-decoration:line-through}
+[data-composer-input]::highlight(dcbmd-quote){color:var(--dsw-alias-label-secondary)}
+
+
+/* ===== dsh-composer-oneline · composer-oneline */
+
+/* one-row composer (Claude style): [+] [input] [send] in the card, mode / model / stats on one line below */
+[class*="_root"]:has(>[data-composer-card]){display:grid!important;grid-template-columns:auto auto minmax(0,1fr) auto auto auto;grid-template-rows:auto auto auto auto;align-items:center;column-gap:10px;width:100%;max-width:calc(var(--dsh-composer-card-max-width,672px) + 32px);margin-inline:auto;box-sizing:border-box;position:relative;isolation:isolate;--dsw-elevation-stroke-color:var(--dsw-alias-border-l2)}
+[class*="_root"]:has(>[data-composer-card])::before{content:"";grid-row:1/4;grid-column:1/-1;align-self:stretch;z-index:-1;border-radius:var(--dsw-radius-lg,16px);background:var(--dsw-specific-input-major);box-shadow:var(--dsw-elevation-soft)}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card],[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"],[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"]>[class*="_tools"],[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"]>[class*="_trailing"]{display:contents!important}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[data-composer-overlay]{grid-row:1;grid-column:1/-1;position:relative;align-self:start}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[data-slot="conversation.input.attachments"]>*{grid-row:2;grid-column:1/-1;padding:8px 12px 0}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[data-input-scroll]{grid-row:3;grid-column:1/-1;margin:0!important;padding:0 50px 0 46px;box-sizing:border-box}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card] [data-composer-input]{padding:10px 0!important;min-height:44px!important;box-sizing:border-box}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card] [data-composer-placeholder]{top:10px!important;left:0!important;right:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"]>[class*="_tools"]>[class*="_add"]{grid-row:3;grid-column:1/-1;justify-self:start;align-self:end;margin:0 0 8px 9px}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"]>[class*="_trailing"]>[class*="_primary"]{grid-row:3;grid-column:1/-1;justify-self:end;align-self:end;margin:0 9px 8px 0}
+/* While a reply runs the trailing primary key becomes the stop one (aria-label 停止): it keeps the
+   send key's slot, mirrored with + around the card's centre. Only if dsh renders both at once does
+   the stop step one button to the left, so it stays visible beside the send. */
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"]>[class*="_trailing"]:has(>button[class*="_primary"]:is([aria-label*="停止"],[aria-label*="Stop" i])):has(>button[class*="_primary"]:not(:is([aria-label*="停止"],[aria-label*="Stop" i])))>button[class*="_primary"]:is([aria-label*="停止"],[aria-label*="Stop" i]){margin-right:43px}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"]>[class*="_trailing"]>[class*="_activity"]{grid-row:3;grid-column:1/-1;justify-self:end;align-self:end;margin:0 50px 12px 0}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"]>[class*="_tools"]>[class*="_modes"]{grid-row:4;grid-column:5;justify-self:end;margin-top:6px}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"]>[class*="_tools"]>[data-slot="conversation.input.left"]>*{grid-row:4;grid-column:3;justify-self:start;margin-top:6px}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"]>[class*="_trailing"]>[class*="_standardControls"]{grid-row:4;grid-column:4;justify-self:end;margin-top:6px}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-dock]{display:contents!important}
+/* marker for other plugins (dsh-claude-theme): this root is laid out by us, its card is display:contents */
+[class*="_root"]:has(>[data-composer-card]){--dco-on:1}
+/* the input dock (queue tray, goal strip, notices) is a row in dsh: every entry sizes to its content and
+   they end up side by side, squeezed, each showing the page through its own fill. Stack them instead —
+   one full-width card per row, above the composer, like the tray was when it was the only entry. */
+[data-slot="conversation.input.dock"]{display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  gap:6px!important;width:100%!important;max-width:var(--dsh-composer-card-max-width,672px)!important;margin:0 auto!important}
+[data-slot="conversation.input.dock"]>*{width:100%!important;min-width:0!important;flex:none!important}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-dock]>[data-slot="conversation.composer.dock"]>*{grid-row:4;margin-top:6px}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-dock] [data-composer-stat="activity"]{grid-column:1;justify-self:start;margin-left:6px}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-dock] [data-composer-stat="usage"]{grid-column:2;justify-self:start}
+/* context usage ring at the right end of the meta line: dsh-claude-context's ring, or, when that plugin is off,
+   dsh's own meter (a direct child of the dock, not a slot entry; without a place it fell into the flexible column) */
+[class*="_root"]:has(>[data-composer-card])>[data-composer-dock] .clx-dock-ring{grid-column:6;justify-self:end;margin-right:4px}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-dock]>:not([data-slot]){grid-row:4;grid-column:6;justify-self:end;align-self:center;margin:6px 4px 0 0}
+/* its panel stays invisible until it has been lined up with the ring (no frame at dsh's own spot) */
+body:has([data-composer-dock]>:not([data-slot]) button[aria-haspopup="dialog"][aria-expanded="true"]) [role="dialog"][style*="--dsh-anchored-max-width"]:not([data-dco-placed]){visibility:hidden!important}
+/* …then opens like the mode and model menus beside it (dsh's panel has no animation of its own) */
+[role="dialog"][data-dco-placed]{animation:dco-in .16s cubic-bezier(.2,.8,.2,1) both;transform-origin:bottom right}
+@keyframes dco-in{from{opacity:0;transform:translateY(4px) scale(.98)}}
+@media (prefers-reduced-motion: reduce){[role="dialog"][data-dco-placed]{animation:none}}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-dock] [data-composer-stat]{opacity:.72;transition:opacity .15s ease}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-dock] [data-composer-stat]:hover,[class*="_root"]:has(>[data-composer-card])>[data-composer-dock] [data-composer-stat]:focus-within{opacity:1}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-dock] [data-composer-stat] svg{display:none}
+[class*="_root"]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"][data-model-compact]{--dsh-composer-model-text-display:block;--dsh-composer-model-icon-display:none}
+[class*="_root"][data-dco-narrow]:has(>[data-composer-card])>[data-composer-card]>[class*="_row"][data-model-compact]{--dsh-composer-model-text-display:none;--dsh-composer-model-icon-display:block}
+[class*="_root"][data-dco-narrow]:has(>[data-composer-card])>[data-composer-dock] [data-composer-stat]{grid-row:5;margin-top:2px}
+[class*="_root"][data-dco-narrow]:has(>[data-composer-card])>[data-composer-dock] [data-composer-stat="activity"]{grid-column:1/-1;justify-self:start}
+[class*="_root"][data-dco-narrow]:has(>[data-composer-card])>[data-composer-dock] [data-composer-stat="usage"]{grid-column:1/-1;justify-self:end;margin-right:4px}
+
+
+/* ===== dsh-composer-hints · composer-hints */
+
+[class*="_root"]:has(>[data-composer-card])[data-dch-ph] [data-composer-placeholder]{font-size:0!important}
+[class*="_root"]:has(>[data-composer-card])[data-dch-ph] [data-composer-placeholder]::before{content:var(--dch-ph);font-size:14px}
+
+
+/* ===== dsh-queue-tray · queue-tray */
+
+[data-queue-dock]{display:none!important}
+.dqt{margin:0 auto 8px;width:100%;max-width:var(--dsh-composer-card-max-width,672px);box-sizing:border-box;
+  border-radius:12px;border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-specific-input-major,#fff);
+  padding:4px 6px 4px 12px;overflow:hidden;
+  animation:dqt-in .16s cubic-bezier(.2,.8,.2,1) both}
+@keyframes dqt-in{from{opacity:0;transform:translateY(4px)}}
+@media (prefers-reduced-motion: reduce){.dqt{animation:none}}
+.dqt-head{display:flex;align-items:center;gap:2px;padding:0 0 2px}
+.dqt-toggle{display:flex;align-items:center;gap:8px;flex:1;min-width:0;border:0;background:none;cursor:pointer;
+  padding:2px 4px;border-radius:6px;color:var(--dsw-alias-label-primary);font:inherit;font-size:13px;font-weight:500;text-align:left}
+.dqt-toggle:hover{background:var(--dsw-alias-interactive-bg-hover)}
+.dqt-toggle svg{width:14px;height:14px;color:var(--dsw-alias-label-tertiary);flex:none}
+.dqt-chev{display:flex;margin-left:1px;color:var(--dsw-alias-label-tertiary);transition:transform .16s ease}
+.dqt-chev svg{width:14px;height:14px}
+.dqt[data-open="0"] .dqt-chev{transform:rotate(-90deg)}
+.dqt-all{flex:none}
+.dqt-list{list-style:none;margin:0;padding:0;max-height:264px;overflow-y:auto;overscroll-behavior:contain;
+  scrollbar-width:thin;scrollbar-color:var(--dsw-alias-border-l2) transparent}
+.dqt-list::-webkit-scrollbar{width:8px}
+.dqt-list::-webkit-scrollbar-thumb{background:var(--dsw-alias-border-l2);border-radius:4px;border:2px solid transparent;background-clip:content-box}
+.dqt-list::-webkit-scrollbar-thumb:hover{background:var(--dsw-alias-label-tertiary);border:2px solid transparent;background-clip:content-box}
+.dqt-list::-webkit-scrollbar-track{background:transparent}
+.dqt-row{display:flex;align-items:center;gap:8px;min-height:28px;padding:0;border-radius:8px}
+.dqt-row[data-busy="1"]{opacity:.6}
+.dqt-idx{flex:none;font-size:11px;font-variant-numeric:tabular-nums;color:var(--dsw-alias-label-tertiary);
+  min-width:14px;text-align:right}
+.dqt-preview{flex:1;min-width:0;font-size:13px;line-height:20px;color:var(--dsw-alias-label-secondary);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dqt-preview [class*="_markdown"]{display:inline}
+.dqt-thumbs{display:flex;gap:4px;flex:none;align-self:center}
+.dqt-thumbs img{width:24px;height:24px;object-fit:cover;border-radius:6px}
+.dqt-file{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--dsw-alias-label-tertiary);max-width:120px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.dqt-status{flex:none;display:flex;align-items:center;gap:6px;font-size:12px;line-height:20px;color:var(--dsw-alias-label-tertiary)}
+.dqt-spin{width:12px;height:12px;border-radius:50%;corner-shape:round;border:1.5px solid var(--dsw-alias-border-l2);border-top-color:var(--dsw-alias-label-secondary);animation:dqt-spin .8s linear infinite}
+@keyframes dqt-spin{to{transform:rotate(360deg)}}
+.dqt-actions{display:flex;align-items:center;gap:2px;flex:none;margin-left:2px}
+.dqt-btn{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border:0;border-radius:8px;
+  background:none;color:var(--dsw-alias-label-tertiary);cursor:pointer;padding:0;align-self:center;transition:background-color .12s ease,color .12s ease}
+.dqt-btn svg{width:14px;height:14px}
+.dqt-btn:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary)}
+.dqt-btn:focus-visible{outline:2px solid var(--dsw-alias-border-l2);outline-offset:1px}
+.dqt-btn:disabled{opacity:.4;cursor:default}
+.dqt-btn[data-kind="steer"]{color:var(--dsw-alias-label-secondary)}
+.dqt-btn[data-kind="steer"]:hover:not(:disabled){color:#2f6fdd;background:color-mix(in srgb,#2f6fdd 10%,transparent)}
+.dqt-btn[data-kind="remove"]:hover:not(:disabled){color:#c4453c;background:color-mix(in srgb,#c4453c 10%,transparent)}
+.dqt-btn[data-kind="save"]{color:#2f6fdd}
+.dqt-all{display:flex;align-items:center;gap:6px;border:0;border-radius:6px;background:none;cursor:pointer;
+  padding:2px 6px;font:inherit;font-size:12px;font-weight:500;color:var(--dsw-alias-label-secondary);transition:background-color .12s ease,color .12s ease}
+.dqt-all svg{width:13px;height:13px}
+.dqt-all:hover:not(:disabled){background:color-mix(in srgb,#2f6fdd 10%,transparent);color:#2f6fdd}
+.dqt-all:disabled{opacity:.4;cursor:default}
+/* editing in place: dsh's InlineEditor brings its own heavy input chrome; keep a frame — it marks the
+   editable field — but make it the tray's own hairline box, and give its two keys the row's wash. */
+.dqt-edit{flex:1;min-width:0;display:flex;align-items:center;gap:2px}
+.dqt-edit input,.dqt-edit textarea,[data-composer-card] .dqt-edit input,[data-composer-card] .dqt-edit textarea{
+  flex:1;min-width:0;height:30px;padding:0 8px!important;
+  border:1px solid var(--dsw-alias-border-l2)!important;border-radius:8px!important;
+  background:transparent!important;box-shadow:none!important;outline:none!important;
+  font:inherit!important;font-size:13px!important;line-height:20px!important;
+  color:var(--dsw-alias-label-primary)!important;transition:border-color .12s ease}
+.dqt-edit input:hover,.dqt-edit textarea:hover{border-color:var(--dsw-alias-border-l3)!important}
+.dqt-edit input:focus,.dqt-edit textarea:focus,.dqt-edit input:focus-visible,.dqt-edit textarea:focus-visible{
+  border-color:var(--dsw-alias-border-l4)!important;box-shadow:none!important;outline:none!important}
+.dqt-edit button{display:flex;align-items:center;justify-content:center;flex:none;width:26px;height:26px;
+  padding:0;border:0;border-radius:8px;background:none;cursor:pointer;
+  color:var(--dsw-alias-label-tertiary);transition:background-color .12s ease,color .12s ease}
+.dqt-edit button:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary)}
+.dqt-edit button:disabled{opacity:.4;cursor:default}
+.dqt-edit button svg{width:14px;height:14px}
+
+
+/* ===== dsh-mode-menu · mode-menu */
+
+.dmm-trigger{display:inline-flex;align-items:center;gap:5px;height:28px;padding:0 8px 0 7px;border:0;border-radius:8px;background:transparent;color:var(--dsw-alias-label-secondary);font:inherit;font-size:13px;cursor:pointer;white-space:nowrap;transition:background-color .15s ease,color .15s ease}
+.dmm-trigger:hover,.dmm-trigger[aria-expanded=true]{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary)}
+.dmm-trigger:disabled{opacity:.55;cursor:default}
+.dmm-trigger .sep{opacity:.5}
+.dmm-chev{transition:transform .18s ease;opacity:.7}
+.dmm-trigger[aria-expanded=true] .dmm-chev{transform:rotate(180deg)}
+.dmm-pop{box-sizing:border-box;position:fixed;z-index:1000;min-width:0;max-width:calc(100vw - 24px);padding:6px;border:0;border-radius:var(--dsw-radius-lg,16px);background:var(--dsw-specific-menu,var(--dsw-alias-bg-layer-2));backdrop-filter:var(--dsw-menu-backdrop-filter);-webkit-backdrop-filter:var(--dsw-menu-backdrop-filter);--dsw-elevation-stroke-color:var(--dsw-alias-border-l1);box-shadow:var(--dsw-elevation-prominent,0 8px 28px rgba(0,0,0,.18));font-size:12px;line-height:18px;color:var(--dsw-alias-label-secondary);animation:dmm-in .16s cubic-bezier(.2,.8,.2,1) both;transform-origin:bottom right}
+@keyframes dmm-in{from{opacity:0;transform:translateY(4px) scale(.98)}}
+@media (prefers-reduced-motion: reduce){.dmm-pop{animation:none}.dmm-chev{transition:none}}
+.dmm-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:4px 8px 8px;margin-bottom:6px;border-bottom:.5px solid var(--dsw-alias-border-l2)}
+.dmm-head b{font-weight:500;font-size:12px;color:var(--dsw-alias-label-primary)}
+.dmm-head span{font-size:12px;color:var(--dsw-alias-label-tertiary)}
+.dmm-item{display:grid;grid-template-columns:18px minmax(0,1fr) 16px;align-items:center;column-gap:10px;width:100%;padding:6px 8px;border:0;border-radius:10px;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.dmm-item:hover,.dmm-item.kbd{background:var(--dsw-alias-interactive-bg-hover)}
+.dmm-item.on{background:transparent}
+.dmm-item.on:hover,.dmm-item.on.kbd{background:var(--dsw-alias-interactive-bg-hover)}
+.dmm-item:disabled{cursor:default;opacity:.6}
+.dmm-item .dmm-glyph{color:var(--dsw-alias-label-secondary)}
+.dmm-item.on .dmm-glyph{color:var(--dsw-alias-state-business-primary)}
+.dmm-item .txt{min-width:0;display:flex;flex-direction:column;gap:1px}
+.dmm-item .lbl{display:inline-flex;align-items:center;gap:6px;font-size:13px;line-height:20px;color:var(--dsw-alias-label-primary)}
+.dmm-item .desc{font-size:12px;line-height:18px;color:var(--dsw-alias-label-tertiary)}
+.dmm-item .chk{color:var(--dsw-alias-state-business-primary);display:inline-flex;justify-content:center}
+.dmm-item .num{font-size:12px;color:var(--dsw-alias-label-tertiary);text-align:right;font-variant-numeric:tabular-nums}
+.dmm-div{height:0;margin:6px 8px;border-top:.5px solid var(--dsw-alias-border-l2)}
+.dmm-note{padding:6px 8px 4px;font-size:12px;color:var(--dsw-alias-label-tertiary)}
+.dmm-note.err{color:var(--dsw-alias-state-error-primary)}
+[data-slot="conversation.input.permission"]:has(.dmm-trigger)>:not(.dmm-trigger):not(.dmm-pop):not(:has(.dmm-trigger)){display:none!important}
+[data-slot="conversation.input.permission"]:has(.dmm-trigger)~[data-slot="conversation.input.plan"],[data-slot="conversation.input.plan"]:has(~[data-slot="conversation.input.permission"] .dmm-trigger){display:none!important}
+.dmm-trigger.plan{color:var(--dsw-alias-state-business-primary);background:color-mix(in srgb,var(--dsw-alias-state-business-primary) 10%,transparent)}
+.dmm-trigger.risky{color:var(--dsw-alias-state-warning-primary,#C98A1E)}
+.dmm-badge{font-size:10px;line-height:15px;padding:0 5px;border-radius:999px;corner-shape:round;background:color-mix(in srgb,var(--dsw-alias-state-warning-primary,#C98A1E) 16%,transparent);color:var(--dsw-alias-state-warning-primary,#C98A1E);font-weight:600}
+.dmm-sw{position:relative;width:26px;height:15px;border-radius:999px;corner-shape:round;background:var(--dsw-alias-border-l3,var(--dsw-alias-border-l2));transition:background-color .15s ease}
+.dmm-sw::after{content:'';position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;corner-shape:round;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s ease}
+.dmm-sw.on{background:var(--dsw-alias-state-business-primary)}
+.dmm-sw.on::after{transform:translateX(11px)}
+.dmm-item.plan{grid-template-columns:18px minmax(0,1fr) 26px}
+.dmm-confirm{margin:4px 4px 2px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--dsw-alias-state-warning-primary,#C98A1E) 10%,transparent)}
+.dmm-confirm b{display:block;font-size:13px;font-weight:600;margin-bottom:3px}
+.dmm-confirm p{margin:0 0 9px;font-size:12px;line-height:1.45;color:var(--dsw-alias-label-secondary)}
+.dmm-confirm .row{display:flex;justify-content:flex-end;gap:6px}
+.dmm-btn{height:26px;padding:0 12px;border-radius:7px;border:1px solid var(--dsw-alias-border-l2);background:transparent;color:var(--dsw-alias-label-primary);font:inherit;font-size:12.5px;cursor:pointer}
+.dmm-btn.warn{border-color:transparent;background:var(--dsw-alias-state-warning-primary,#C98A1E);color:#fff}
+[class*="_root"]:has(>[data-composer-card]) .dmm-trigger:not(.dmm-mtrigger):not(.plan):not(.risky) .dmm-glyph{display:none}
+[class*="_root"]:has(>[data-composer-card]) .dmm-trigger{padding-left:8px}
+[class*="_root"]:has(>[data-composer-card]) .dmm-trigger .dmm-chev{display:none}
+[class*="_root"]:has(>[data-composer-card]) .dmm-trigger{padding-right:8px}
+
+
+/* ===== dsh-model-menu · model-menu */
+
+.dmd-trigger{display:inline-flex;align-items:center;gap:5px;height:28px;padding:0 8px 0 7px;border:0;border-radius:8px;background:transparent;color:var(--dsw-alias-label-secondary);font:inherit;font-size:13px;cursor:pointer;white-space:nowrap;transition:background-color .15s ease,color .15s ease}
+.dmd-trigger:hover,.dmd-trigger[aria-expanded=true]{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary)}
+.dmd-trigger:disabled{opacity:.55;cursor:default}
+.dmd-trigger .sep{opacity:.5}
+.dmd-chev{transition:transform .18s ease;opacity:.7}
+.dmd-trigger[aria-expanded=true] .dmd-chev{transform:rotate(180deg)}
+.dmd-pop{box-sizing:border-box;position:fixed;z-index:1000;min-width:0;max-width:calc(100vw - 24px);padding:6px;border:0;border-radius:var(--dsw-radius-lg,16px);background:var(--dsw-specific-menu,var(--dsw-alias-bg-layer-2));backdrop-filter:var(--dsw-menu-backdrop-filter);-webkit-backdrop-filter:var(--dsw-menu-backdrop-filter);--dsw-elevation-stroke-color:var(--dsw-alias-border-l1);box-shadow:var(--dsw-elevation-prominent,0 8px 28px rgba(0,0,0,.18));font-size:12px;line-height:18px;color:var(--dsw-alias-label-secondary);animation:dmd-in .16s cubic-bezier(.2,.8,.2,1) both;transform-origin:bottom left}
+@keyframes dmd-in{from{opacity:0;transform:translateY(4px) scale(.98)}}
+@media (prefers-reduced-motion: reduce){.dmd-pop{animation:none}.dmd-chev{transition:none}}
+.dmd-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:4px 8px 8px;margin-bottom:6px;border-bottom:.5px solid var(--dsw-alias-border-l2)}
+.dmd-head b{font-weight:500;font-size:12px;color:var(--dsw-alias-label-primary)}
+.dmd-head span{font-size:12px;color:var(--dsw-alias-label-tertiary)}
+.dmd-item{display:grid;grid-template-columns:18px minmax(0,1fr) 16px 14px;align-items:center;column-gap:10px;width:100%;padding:6px 8px;border:0;border-radius:10px;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.dmd-item:hover,.dmd-item.kbd{background:var(--dsw-alias-interactive-bg-hover)}
+.dmd-item.on{background:var(--dsw-alias-interactive-bg-active,var(--dsw-alias-interactive-bg-hover))}
+.dmd-item:disabled{cursor:default;opacity:.6}
+.dmd-item .dmd-glyph{color:var(--dsw-alias-label-secondary)}
+.dmd-item.on .dmd-glyph{color:var(--dsw-alias-state-business-primary)}
+.dmd-item .txt{min-width:0;display:flex;flex-direction:column;gap:1px}
+.dmd-item .lbl{display:inline-flex;align-items:center;gap:6px;font-size:13px;line-height:20px;color:var(--dsw-alias-label-primary)}
+.dmd-item .desc{font-size:12px;line-height:18px;color:var(--dsw-alias-label-tertiary)}
+.dmd-item .chk{color:var(--dsw-alias-state-business-primary);display:inline-flex;justify-content:center}
+.dmd-item .num{font-size:12px;color:var(--dsw-alias-label-tertiary);text-align:right;font-variant-numeric:tabular-nums}
+.dmd-div{height:0;margin:6px 8px;border-top:.5px solid var(--dsw-alias-border-l2)}
+.dmd-note{padding:6px 8px 4px;font-size:12px;color:var(--dsw-alias-label-tertiary)}
+.dmd-note.err{color:var(--dsw-alias-state-error-primary)}
+.dmd-mtrigger .nm{max-width:220px;overflow:hidden;text-overflow:ellipsis;color:var(--dsw-alias-label-primary)}
+.dmd-mtrigger .eff{color:var(--dsw-alias-label-tertiary)}
+.dmd-mpop{display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right}
+.dmd-mrow{display:grid;grid-template-columns:minmax(0,1fr) auto 16px;grid-template-areas:"l v c" "s s c";align-items:center;column-gap:10px;width:100%;min-height:32px;padding:6px 8px;border:0;border-radius:10px;background:transparent;color:var(--dsw-alias-label-primary);font:inherit;font-size:13px;text-align:left;cursor:pointer;flex:none}
+.dmd-mrow:hover,.dmd-mrow:focus-visible{background:var(--dsw-alias-interactive-bg-hover);outline:none}
+.dmd-mrow:disabled{cursor:default;opacity:.6}
+.dmd-mrow .lbl{grid-area:l;min-width:0;display:flex;align-items:center;gap:8px}
+.dmd-mrow .lbl .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dmd-mrow .sub{grid-area:s;font-size:12px;line-height:18px;color:var(--dsw-alias-label-tertiary)}
+.dmd-mrow .chk{grid-area:c;color:var(--dsw-alias-state-business-primary);display:inline-flex;justify-content:center}
+.dmd-mrow .num{grid-area:n;font-size:12px;color:var(--dsw-alias-label-tertiary);text-align:right;font-variant-numeric:tabular-nums}
+.dmd-mrow.nav{grid-template-columns:minmax(0,1fr) auto 14px;grid-template-areas:"l v x"}
+.dmd-mrow .val{grid-area:v;font-size:12px;color:var(--dsw-alias-label-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px}
+.dmd-mrow.nav>svg{grid-area:x;color:var(--dsw-alias-menu-icon,var(--dsw-alias-label-tertiary))}
+.dmd-mback{display:flex;align-items:center;gap:6px;width:100%;padding:4px 8px 6px;margin:0;border:0;background:transparent;color:var(--dsw-alias-label-primary);font:inherit;font-size:13px;font-weight:500;line-height:20px;cursor:pointer;text-align:left;flex:none;border-radius:8px}
+.dmd-mback svg{color:var(--dsw-alias-label-tertiary);transition:transform .12s ease}
+.dmd-mback:hover svg{color:var(--dsw-alias-label-primary);transform:translateX(-1px)}
+/* search: a soft filled field with a magnifier, no blue ring */
+.dmd-msearch{flex:none;box-sizing:border-box;width:auto;margin:2px 4px 6px;height:32px;padding:0 10px 0 30px;border:0;border-radius:8px;
+  background:color-mix(in srgb,var(--dsw-alias-label-primary) 5%,transparent) url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2016%2016'%20fill%3D'none'%20stroke%3D'%23888'%20stroke-width%3D'1.5'%20stroke-linecap%3D'round'%3E%3Ccircle%20cx%3D'7'%20cy%3D'7'%20r%3D'4.5'%2F%3E%3Cpath%20d%3D'm10.5%2010.5%203%203'%2F%3E%3C%2Fsvg%3E") no-repeat 10px center/14px 14px;
+  color:var(--dsw-alias-label-primary);font:inherit;font-size:13px;outline:none;transition:background-color .12s ease,box-shadow .12s ease}
+.dmd-msearch::placeholder{color:var(--dsw-alias-label-tertiary)}
+.dmd-msearch:hover{background-color:color-mix(in srgb,var(--dsw-alias-label-primary) 7%,transparent)}
+.dmd-msearch:focus{background-color:color-mix(in srgb,var(--dsw-alias-label-primary) 7%,transparent);box-shadow:inset 0 0 0 .5px var(--dsw-alias-border-l2)}
+.dmd-mscroll{min-height:0;overflow:auto;max-height:340px;margin:0 -2px;padding:0 2px;scrollbar-width:thin;scrollbar-color:transparent transparent;
+  -webkit-mask:linear-gradient(#000 calc(100% - 14px),transparent);mask:linear-gradient(#000 calc(100% - 14px),transparent);padding-bottom:10px}
+.dmd-mscroll:hover{scrollbar-color:var(--dsw-alias-border-l2) transparent}
+.dmd-mgroup{position:static;padding:10px 8px 3px;font-size:11.5px;line-height:16px;font-weight:500;letter-spacing:.01em;color:var(--dsw-alias-label-tertiary);background:transparent}
+.dmd-mgroup:first-child{padding-top:4px}
+.dmd-mscroll .dmd-mrow{min-height:30px;padding:5px 8px}
+.dmd-mbadge{flex:none;font-size:11px;line-height:17px;padding:0 7px;border-radius:999px;corner-shape:round;border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-secondary);font-weight:400}
+.dmd-mbadge.info{color:var(--dsw-alias-state-business-primary);border-color:color-mix(in srgb,var(--dsw-alias-state-business-primary) 35%,transparent)}
+.dmd-mbadge.success{color:var(--dsw-alias-state-success-primary,#2f9e5b);border-color:color-mix(in srgb,var(--dsw-alias-state-success-primary,#2f9e5b) 35%,transparent)}
+.dmd-mbadge.warning{color:var(--dsw-alias-state-warning-primary,#C98A1E);border-color:color-mix(in srgb,var(--dsw-alias-state-warning-primary,#C98A1E) 35%,transparent)}
+[class*="_root"]:has(>[data-composer-card]) .dmd-trigger{padding-left:8px}
+[class*="_root"]:has(>[data-composer-card]) .dmd-trigger .dmd-chev{display:none}
+[class*="_root"]:has(>[data-composer-card]) .dmd-trigger{padding-right:8px}
+
+
+/* ===== dsh-smooth-caret · smooth-caret */
+
+html[data-dsc-caret] [data-composer-input][contenteditable="true"]{caret-color:transparent!important}
+.dsc-caret{position:fixed;left:0;top:0;z-index:20;width:2px;border-radius:1px;pointer-events:none;
+  background:var(--dsw-alias-label-primary);opacity:0;will-change:transform,opacity;
+  transition:transform .09s cubic-bezier(.2,.8,.2,1),height .09s ease}
+.dsc-caret.on{opacity:.92;animation:dsc-breathe 1.15s ease-in-out .5s infinite}
+.dsc-caret.jump{transition:none}
+@keyframes dsc-breathe{0%,45%{opacity:.92}62%,85%{opacity:0}100%{opacity:.92}}
+@media (prefers-reduced-motion: reduce){.dsc-caret{transition:none}.dsc-caret.on{animation:none}}
+
+
+/* ===== dsh-to-bottom · to-bottom */
+
+[class*="_toBottomSlot"]{position:fixed!important;right:auto!important;margin:0!important;height:32px!important;min-height:32px!important;
+  padding:0!important;z-index:8;display:flex!important;align-items:center;justify-content:center!important;pointer-events:none;
+  visibility:hidden}
+[class*="_toBottomSlot"] > button{width:32px!important;height:32px!important;min-width:32px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;corner-shape:round!important;
+  display:grid!important;place-items:center;position:relative;cursor:pointer;pointer-events:auto!important;color:var(--dsw-alias-label-primary)!important;
+  /* 磨砂：只留一层薄玻璃，让后面那团粒子/极光的颜色透上来，再靠 blur + saturate 磨平细节 */
+  --dtb-glass:color-mix(in srgb,var(--dsw-alias-bg-layer-1,var(--dsw-alias-bg-base,#10151c)) 42%,transparent);
+  --dtb-edge:color-mix(in srgb,var(--dsw-alias-label-primary,#fff) 13%,transparent);
+  background:var(--dtb-glass)!important;
+  -webkit-backdrop-filter:blur(26px) saturate(1.9) brightness(1.06);backdrop-filter:blur(26px) saturate(1.9) brightness(1.06);
+  box-shadow:inset 0 .5px 0 color-mix(in srgb,#fff 17%,transparent),inset 0 0 0 .5px var(--dtb-edge),
+    0 5px 16px rgba(0,0,0,.20),0 1px 3px rgba(0,0,0,.12)!important;
+  transition:background-color .16s ease,color .16s ease,box-shadow .16s ease,transform .16s ease}
+@media (hover:hover){[class*="_toBottomSlot"] > button:hover{color:var(--dsw-alias-label-primary)!important;
+  background:color-mix(in srgb,var(--dsw-alias-bg-layer-1,var(--dsw-alias-bg-base,#10151c)) 58%,transparent)!important;
+  box-shadow:inset 0 .5px 0 color-mix(in srgb,#fff 20%,transparent),inset 0 0 0 .5px var(--dsw-alias-border-l3),
+    0 7px 20px rgba(0,0,0,.26),0 1px 3px rgba(0,0,0,.14)!important}}
+[class*="_toBottomSlot"] > button:active{transform:scale(.96)}
+/* 关掉透明效果的系统偏好：换成实心，别让字/点糊在背景上 */
+@media (prefers-reduced-transparency:reduce){[class*="_toBottomSlot"] > button{background:var(--dsw-alias-bg-layer-1,var(--dsw-alias-bg-base,#10151c))!important;
+  -webkit-backdrop-filter:none;backdrop-filter:none}}
+[class*="_toBottomSlot"] > button > svg{display:none!important}
+[class*="_toBottomSlot"] > button::before{content:"";width:15px;height:15px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2016%2016'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.6'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M8%202.75v10.5M3.5%208.75%208%2013.25l4.5-4.5'%2F%3E%3C%2Fsvg%3E") center/15px 15px no-repeat;mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2016%2016'%20fill%3D'none'%20stroke%3D'black'%20stroke-width%3D'1.6'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M8%202.75v10.5M3.5%208.75%208%2013.25l4.5-4.5'%2F%3E%3C%2Fsvg%3E") center/15px 15px no-repeat}
+/* streaming: three dots in the harness accent instead of the arrow */
+html:has([data-composer-seat] button:is([aria-label*="停止"],[aria-label*="Stop" i])) [class*="_toBottomSlot"] > button{color:var(--dsw-alias-state-business-primary,#4d6bfe)!important}
+html:has([data-composer-seat] button:is([aria-label*="停止"],[aria-label*="Stop" i])) [class*="_toBottomSlot"] > button::before{width:3.5px;height:3.5px;border-radius:50%;corner-shape:round;-webkit-mask:none;mask:none;background:currentColor;
+  box-shadow:-6.5px 0 0 currentColor,6.5px 0 0 currentColor;animation:dtb-pulse 1.15s ease-in-out infinite}
+@keyframes dtb-pulse{0%,100%{opacity:.4}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){html:has([data-composer-seat] button:is([aria-label*="停止"],[aria-label*="Stop" i])) [class*="_toBottomSlot"] > button::before{animation:none;opacity:.9}}
+
+
+/* ===== dsh-stack-cards · stack-cards */
+
+/* the strip itself: same box as the plan card under the newest reply */
+[data-goal-bar] [class*="_bar"]{border-radius:12px!important;box-shadow:none!important;
+  border:1px solid var(--dsw-alias-border-l2)!important;
+  background:var(--dsw-specific-input-major,#fff)!important;
+  padding:4px 6px 4px 12px!important;max-width:var(--dsh-composer-card-max-width,672px)!important}
+/* dsh paints the menu surface (fill + backdrop blur) on a ::before layer; the bar carries the fill
+   itself instead, because the strip floats over the scrolling conversation and a see-through fill
+   lets replies show through the label. */
+[data-goal-bar] [class*="_bar"]::before{display:none!important}
+/* phase label and objective, as in the plan card header */
+[data-goal-bar] [class*="_label"]{font-size:13px;line-height:22px;font-weight:500}
+[data-goal-bar] [class*="_objective"]{font-size:13px;line-height:22px;color:var(--dsw-alias-label-secondary)}
+[data-goal-bar] [class*="_error"]{font-size:12px;line-height:22px}
+[data-goal-bar] [class*="_goalGlyph"]{color:var(--dsw-alias-label-tertiary)}
+/* keys: the queue tray's 26px square wash, not dsh's 28px circle */
+[data-goal-bar] [class*="_iconBtn"]{width:26px;height:26px;border-radius:8px;corner-shape:round;
+  color:var(--dsw-alias-label-tertiary);transition:background-color .12s ease,color .12s ease}
+@media (hover:hover){[data-goal-bar] [class*="_iconBtn"]:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary)}}
+[data-goal-bar] [class*="_iconBtn"]:focus-visible{outline:2px solid var(--dsw-alias-border-l2);outline-offset:1px}
+[data-goal-bar] [class*="_iconBtn"]:disabled{opacity:.4}
+/* the inline edit strip keeps the same box, it just grows with the editor; its field wears the same
+   hairline frame as the queue tray's editor so the two editing surfaces read as one family */
+[data-goal-bar] [class*="_editBar"]{height:auto!important;min-height:36px;gap:2px}
+[data-goal-bar] [class*="_editBar"] input,[data-goal-bar] [class*="_editBar"] textarea{
+  height:30px!important;padding:0 8px!important;
+  border:1px solid var(--dsw-alias-border-l2)!important;border-radius:8px!important;
+  background:transparent!important;box-shadow:none!important;outline:none!important;
+  font-family:inherit!important;font-size:13px!important;line-height:20px!important;
+  color:var(--dsw-alias-label-primary)!important;transition:border-color .12s ease}
+[data-goal-bar] [class*="_editBar"] input:hover,[data-goal-bar] [class*="_editBar"] textarea:hover{border-color:var(--dsw-alias-border-l3)!important}
+[data-goal-bar] [class*="_editBar"] input:focus,[data-goal-bar] [class*="_editBar"] textarea:focus,
+[data-goal-bar] [class*="_editBar"] input:focus-visible,[data-goal-bar] [class*="_editBar"] textarea:focus-visible{
+  border-color:var(--dsw-alias-border-l4)!important;box-shadow:none!important;outline:none!important}
+[data-goal-bar] [class*="_editBar"] button{display:flex;align-items:center;justify-content:center;flex:none;
+  width:26px;height:26px;padding:0;border:0;border-radius:8px;background:none;cursor:pointer;
+  color:var(--dsw-alias-label-tertiary);transition:background-color .12s ease,color .12s ease}
+[data-goal-bar] [class*="_editBar"] button:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary)}
+[data-goal-bar] [class*="_editBar"] button svg{width:14px;height:14px}
+

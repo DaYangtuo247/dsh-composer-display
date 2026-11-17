@@ -1,0 +1,42 @@
+[
+  {
+    "id": "dom-hub",
+    "feature": null
+  },
+  {
+    "id": "dsh-composer-buttons",
+    "feature": null
+  },
+  {
+    "id": "dsh-composer-oneline",
+    "feature": null
+  },
+  {
+    "id": "dsh-composer-hints",
+    "feature": null
+  },
+  {
+    "id": "dsh-queue-tray",
+    "feature": null
+  },
+  {
+    "id": "dsh-mode-menu",
+    "feature": null
+  },
+  {
+    "id": "dsh-model-menu",
+    "feature": null
+  },
+  {
+    "id": "dsh-smooth-caret",
+    "feature": null
+  },
+  {
+    "id": "dsh-to-bottom",
+    "feature": null
+  },
+  {
+    "id": "dsh-stack-cards",
+    "feature": null
+  }
+]

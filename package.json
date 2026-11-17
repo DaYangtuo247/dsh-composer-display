@@ -1,0 +1,57 @@
+{
+  "name": "dsh-composer-display",
+  "version": "1.0.0",
+  "description": "The input box and what sits on it: one-row layout, return-glyph send button, live Markdown highlighting, shorter hints, a queued-message tray, Claude-style Mode and Model menus, a smooth gliding caret and a centred back-to-bottom button.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc -p . --noEmit",
+    "check": "node build.mjs && node ./scripts/verify-corner-shape.mjs ."
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-theme",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-permission-presets",
+        "@deepseek-ai/dsh-client-ui-plan",
+        "@deepseek-ai/dsh-client-ui-model-selection"
+      ]
+    }
+  },
+  "devDependencies": {
+    "sass": "1.108.2",
+    "typescript": "7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaYangtuo247/dsh-composer-display.git"
+  },
+  "homepage": "https://github.com/DaYangtuo247/dsh-composer-display#readme",
+  "bugs": {
+    "url": "https://github.com/DaYangtuo247/dsh-composer-display/issues"
+  }
+}
